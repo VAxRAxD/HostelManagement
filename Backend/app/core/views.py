@@ -42,4 +42,14 @@ def deleteStudent(request,id):
     student.delete()
     return HttpResponse()
 
+@api_view(('GET',))
+def mess(request):
+    mess=Mess.objects.all()
+    serializer=MessSerializer(mess,many=True)
+    return Response(serializer.data)
 
+def login(request):
+    if request.method=="POST":
+        pass
+    else:
+        return HttpResponse("Im-Getter")
