@@ -11,7 +11,7 @@ class StudentSerializer(ModelSerializer):
     def get_number(self,Student):
         if Student.room:
             return Student.room.number
-        return "None"
+        return "No"
     def get_hostel_fees(self,Student):
         if Student.hostel_fees:
             return "Paid"
@@ -29,7 +29,7 @@ class RoomSerializer(ModelSerializer):
     def get_name(self,Room):
         if Room.student:
             return Room.student.name
-        return "None"
+        return "No"
 
 class MessSerializer(ModelSerializer):
     class Meta:

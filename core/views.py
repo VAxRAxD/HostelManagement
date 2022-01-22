@@ -51,9 +51,19 @@ def mess(request):
 @api_view(('GET','POST'))
 def login(request):
     if request.method=="POST":
-        data=request.data
-        print(data)
-        return Response(data)
+        data=list(request.data[0].values())
+        name=data[0]
+        password=data[1]
+        student=Student.objects.get(name=name)
+        if student and student.password==password:
+            validate=[{
+                    'validation':'pass'
+                }]
+        else:
+            validate=[{
+                    'validation':'fail'
+                }]
+        return Response(validate)
         
     else:
         data=[{
