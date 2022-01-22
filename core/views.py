@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from importlib_metadata import re
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -66,9 +67,9 @@ def mess(request):
 def login(request):
     if request.method=="POST":
         data=list(request.data[0].values())
-        name=data[0]
+        email=data[0]
         password=data[1]
-        student=Student.objects.get(name=name)
+        student=Student.objects.get(email=email)
         if student and student.password==password:
             validate=[{
                     'validation':'pass'
@@ -78,12 +79,32 @@ def login(request):
                     'validation':'fail'
                 }]
         return Response(validate)
-        
     else:
+        return Response()
+
+@api_view(('GET','POST'))
+def register(request):
+    if request.method=="POST":
+        data=list(request.data[0].values())
+        name=data[0]
+        email=data[1]
+        address=data[2]
+        phone=data[3]
+        password=data[4]
+        Student.objects.create(
+            name=name,
+            email=email,
+            address=address,
+            phone=phone,
+            password=password
+        )
         data=[{
-            'method':'Get'
+            'registered':'pass'
         }]
         return Response(data)
+    else:
+        return Response()
+
 @api_view(('GET','POST'))
 def studentUpdate(request):
     if request.method=="POST":
@@ -122,7 +143,4 @@ def studentUpdate(request):
             }]
         return Response(data)
     else:
-        data=[{
-            'method':'Get'
-        }]
-        return Response(data)
+        return Response()

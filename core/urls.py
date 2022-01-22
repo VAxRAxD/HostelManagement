@@ -6,6 +6,7 @@ urlpatterns=[
     path('rooms/',views.rooms,name="home"),
     path('mess/',views.mess,name="mess"),
     path('login/',views.login,name="login"),
+    path('register/',views.register,name="register"),
     path('students/<str:id>/',views.studentDetails,name="student_details"),
     path('rooms/<str:id>/',views.roomDetails,name="room_details"),
     path('rooms/delete/<str:id>',views.deleteRoom,name="delete_room"),
