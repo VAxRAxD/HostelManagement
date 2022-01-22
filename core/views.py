@@ -88,16 +88,18 @@ def login(request):
 def studentUpdate(request):
     if request.method=="POST":
         data=list(request.data[0].values())
-        name=data[0]
-        email=data[1]
-        address=data[2]
-        phone=data[3]
-        room=data[4]
-        hostel_fees=data[5]
-        mess_fees=data[6]
-        attendance=data[7]
-        student=Student.objects.get(name=name)
+        id=data[0]
+        name=data[1]
+        email=data[2]
+        address=data[3]
+        phone=data[4]
+        room=data[5]
+        hostel_fees=data[6]
+        mess_fees=data[7]
+        attendance=data[8]
+        student=Student.objects.get(id=id)
         if student:
+            student.name=name
             student.email=email
             student.address=address
             student.phone=phone
