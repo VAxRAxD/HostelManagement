@@ -1,3 +1,4 @@
+from http.client import HTTPResponse
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -42,4 +43,14 @@ def deleteStudent(request,id):
     student.delete()
     return HttpResponse()
 
+@api_view(('GET',))
+def mess(request):
+    mess=Mess.objects.all()
+    serializer=MessSerializer(mess,many=True)
+    return Response(serializer.data)
 
+def login(request):
+    if request.method=="POST":
+        return HttpResponse("Im-Poster")
+    else:
+        return HttpResponse("Im-Getter")
