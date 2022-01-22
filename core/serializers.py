@@ -20,7 +20,6 @@ class StudentSerializer(ModelSerializer):
         if Student.mess_fees:
             return "Paid"
         return "Pending"
-
 class RoomSerializer(ModelSerializer):
     student_name= SerializerMethodField('get_name')
     class Meta:
@@ -30,7 +29,6 @@ class RoomSerializer(ModelSerializer):
         if Room.student:
             return Room.student.name
         return "None"
-
 class MessSerializer(ModelSerializer):
     class Meta:
         model=Mess

@@ -12,4 +12,6 @@ urlpatterns=[
     path('rooms/delete/<str:id>',views.deleteRoom,name="delete_room"),
     path('students/delete/<str:id>',views.deleteStudent,name="delete_student"),
     path('student/update/',views.studentUpdate,name="update_student"),
+    path('hostelfees/<str:id>/',views.hostelFees,name="hostel_fees"),
+    path('messfees/<str:id>/',views.messFees,name="mees_fees"),
 ]

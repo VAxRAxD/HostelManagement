@@ -113,7 +113,7 @@ def studentUpdate(request):
         email=data[2]
         address=data[3]
         phone=data[4]
-        room=data[5]
+        room_no=data[5]
         hostel_fees=data[6]
         mess_fees=data[7]
         attendance=data[8]
@@ -123,6 +123,33 @@ def studentUpdate(request):
             student.email=email
             student.address=address
             student.phone=phone
+            if room_no=="None":
+                if student.room:
+                    room=Room.objects.get(number=student.room.number)
+                    room.student=None
+                    room.status="Empty"
+                    student.room=None
+                    room.save()
+                    student.save()
+            else:
+                if student.room:
+                    room=Room.objects.get(number=student.room.number)
+                    room.student=None
+                    room.status="Empty"
+                    room.save()
+                    new_room=Room.objects.get(number=int(room_no))
+                    new_room.student=student
+                    new_room.status="Occupied"
+                    student.room=new_room
+                    new_room.save()
+                    student.save()
+                else:
+                    new_room=Room.objects.get(number=int(room_no))
+                    new_room.student=student
+                    new_room.status="Occupied"
+                    student.room=new_room
+                    new_room.save()
+                    student.save()
             if hostel_fees=="Paid":
                 student.hostel_fees=True
             else:
@@ -141,5 +168,31 @@ def studentUpdate(request):
             'update':'fail'
             }]
         return Response(data)
+    else:
+        return Response()
+
+@api_view(('GET','POST'))
+def hostelFees(request,id):
+    if request.method=="POST":
+        student=Student.objects.get(id=id)
+        student.hostel_fees=True
+        student.save()
+        validate=[{
+            'payment':'success'
+        }]
+        return Response(validate)
+    else:
+        return Response()
+
+@api_view(('GET','POST'))
+def messFees(request,id):
+    if request.method=="POST":
+        student=Student.objects.get(id=id)
+        student.mess_fees=True
+        student.save()
+        validate=[{
+            'payment':'success'
+        }]
+        return Response(validate)
     else:
         return Response()
