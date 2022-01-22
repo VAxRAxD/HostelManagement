@@ -48,8 +48,15 @@ def mess(request):
     serializer=MessSerializer(mess,many=True)
     return Response(serializer.data)
 
+@api_view(('GET','POST'))
 def login(request):
     if request.method=="POST":
-        pass
+        data=request.data
+        print(data)
+        return Response(data)
+        
     else:
-        return HttpResponse("Im-Getter")
+        data=[{
+            'method':'Get'
+        }]
+        return Response(data)

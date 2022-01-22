@@ -3,6 +3,7 @@ from pickle import FALSE
 from sre_constants import CATEGORY
 from unicodedata import category
 from django.db import models
+from django.core.validators import MinLengthValidator
 
 # Create your models here.
 class Student(models.Model):
@@ -10,6 +11,7 @@ class Student(models.Model):
     email=models.EmailField(unique=True)
     address=models.TextField(null=True)
     phone=models.CharField(max_length=10,null=True)
+    password=models.CharField(validators=[MinLengthValidator(8)],max_length=15,null=True,blank=True)
     room=models.ForeignKey("Room",null=True,blank=True,related_name='room_details',on_delete=models.SET_NULL)
     attendance=models.CharField(max_length=10,default="000.000")
     hostel_fees=models.BooleanField(default=False)
