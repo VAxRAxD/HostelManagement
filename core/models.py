@@ -44,3 +44,10 @@ class Mess(models.Model):
     def __str__(self):
         return self.name
 
+# class HostelFees(models.Model):
+#     name=models.ForeignKey(Student,null=True,on_delete=models.SET_NULL)
+#     paid=models.BooleanField(default=False)
+#     date=models.DateField(null=True)
+
+#     def __str__(self):
+#         return self.name+str("Fees")

@@ -7,7 +7,7 @@ class StudentSerializer(ModelSerializer):
     mess_fees=SerializerMethodField("get_mess_fees")
     class Meta:
         model=Student
-        fields=['name','email','address','phone','room_number','hostel_fees','mess_fees','attendance']
+        fields=['name','email','address','phone','password','room_number','hostel_fees','mess_fees','attendance']
     def get_number(self,Student):
         if Student.room:
             return Student.room.number

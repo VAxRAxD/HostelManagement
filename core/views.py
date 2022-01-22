@@ -70,3 +70,43 @@ def login(request):
             'method':'Get'
         }]
         return Response(data)
+@api_view(('GET','POST'))
+def studentUpdate(request):
+    if request.method=="POST":
+        data=list(request.data[0].values())
+        name=data[0]
+        email=data[1]
+        address=data[2]
+        phone=data[3]
+        room=data[4]
+        hostel_fees=data[5]
+        mess_fees=data[6]
+        attendance=data[7]
+        student=Student.objects.get(name=name)
+        if student:
+            student.email=email
+            student.address=address
+            student.phone=phone
+            if hostel_fees=="Paid":
+                student.hostel_fees=True
+            else:
+                student.hostel_fees=False
+            if mess_fees=="Paid":
+                student.mess_fees=True
+            else:
+                student.mess_fees=False
+            student.attendnace=attendance
+            student.save()
+            data=[{
+            'update':'pass'
+            }]
+        else:
+            data=[{
+            'update':'fail'
+            }]
+        return Response(data)
+    else:
+        data=[{
+            'method':'Get'
+        }]
+        return Response(data)
