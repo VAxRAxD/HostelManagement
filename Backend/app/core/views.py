@@ -51,6 +51,6 @@ def mess(request):
 
 def login(request):
     if request.method=="POST":
-        return HttpResponse("Im-Poster")
+        pass
     else:
         return HttpResponse("Im-Getter")
