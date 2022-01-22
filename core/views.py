@@ -39,8 +39,9 @@ def deleteRoom(request,id):
 @api_view(('GET',))
 def deleteStudent(request,id):
     student=Student.objects.get(id=id)
-    student.delete()
-    return HttpResponse()
+    room_no=student.room.number
+    room=Room.objects.get(number=room_no)
+    return HttpResponse(room.status)
 
 @api_view(('GET',))
 def mess(request):
