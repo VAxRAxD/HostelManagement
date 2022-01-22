@@ -10,7 +10,7 @@ class StudentSerializer(ModelSerializer):
         fields=['name','email','address','phone','password','room_number','hostel_fees','mess_fees','attendance']
     def get_number(self,Student):
         if Student.room:
-            return Student.room.number
+            return str(Student.room.number)
         return "No"
     def get_hostel_fees(self,Student):
         if Student.hostel_fees:
