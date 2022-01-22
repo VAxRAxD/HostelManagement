@@ -42,13 +42,19 @@ def deleteStudent(request,id):
     if student.room:
         room_no=student.room.number
         room=Room.objects.get(number=room_no)
-        room.Status="Empty"
+        room.status="Empty"
         room.save()
         student.delete()
-        return HttpResponse()
+        data=[{
+                'deletion':'pass'
+            }]
+        return Response(data)
     else:
         student.delete()
-        return HttpResponse()
+        data=[{
+                'deletion':'pass'
+            }]
+        return Response(data)
 
 @api_view(('GET',))
 def mess(request):
