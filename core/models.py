@@ -48,6 +48,8 @@ class Allotment(models.Model):
     email=models.EmailField(unique=True)
     address=models.TextField(null=True)
     preference=models.IntegerField(null=True)
+    class Meta:
+        ordering=['prefernce']
 
     def __str__(self):
         return str(self.name)+" "+str(self.address)
