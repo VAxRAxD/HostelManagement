@@ -201,3 +201,31 @@ def messFees(request,id):
         return Response(validate)
     else:
         return Response()
+
+@api_view(('GET','POST'))
+def allotment(request):
+    if request.method=="POST":
+        data=list(request.data[0].values())
+        id=data[0]
+        name=data[1]
+        email=data[2]
+        address=data[3]
+        student=Student.objects.get(id=id)
+        if student:
+            Allotment.objects.create(
+                name=student.name,
+                email=student.email,
+                address=student.address,
+                preference= 1 #Add here preference
+            )
+            data=[{
+            'request':'pass'
+            }]
+            return Response(data)
+        else:
+            data=[{
+            'request':'fail'
+            }]
+        return Response(data)
+    else:
+        return Response()

@@ -42,3 +42,12 @@ class Mess(models.Model):
 
     def __str__(self):
         return self.name
+
+class Allotment(models.Model):
+    name=models.CharField(max_length=100, null=True, unique=True)
+    email=models.EmailField(unique=True)
+    address=models.TextField(null=True)
+    preference=models.IntegerField(null=True)
+
+    def __str__(self):
+        return str(self.name)+" "+str(self.address)
