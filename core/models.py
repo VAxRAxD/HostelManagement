@@ -13,7 +13,6 @@ class Student(models.Model):
     phone=models.CharField(max_length=10,null=True)
     password=models.CharField(validators=[MinLengthValidator(8)],max_length=15,null=True,blank=True)
     room=models.ForeignKey("Room",null=True,blank=True,related_name='room_details',on_delete=models.SET_NULL)
-    attendance=models.CharField(max_length=10,default="000.000")
     hostel_fees=models.BooleanField(default=False)
     mess_fees=models.BooleanField(default=False)
 
@@ -43,11 +42,3 @@ class Mess(models.Model):
 
     def __str__(self):
         return self.name
-
-# class HostelFees(models.Model):
-#     name=models.ForeignKey(Student,null=True,on_delete=models.SET_NULL)
-#     paid=models.BooleanField(default=False)
-#     date=models.DateField(null=True)
-
-#     def __str__(self):
-#         return self.name+str("Fees")

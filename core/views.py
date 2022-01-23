@@ -116,7 +116,6 @@ def studentUpdate(request):
         room_no=data[5]
         hostel_fees=data[6]
         mess_fees=data[7]
-        attendance=data[8]
         student=Student.objects.get(id=id)
         if student:
             student.name=name
@@ -158,7 +157,6 @@ def studentUpdate(request):
                 student.mess_fees=True
             else:
                 student.mess_fees=False
-            student.attendnace=attendance
             student.save()
             data=[{
             'update':'pass'

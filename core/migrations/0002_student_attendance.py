@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='student',
             name='attendance',
-            field=models.CharField(default='000.000', max_length=5),
+            field=models.CharField(default='000.000', max_length=7),
         ),
     ]
