@@ -1,0 +1,5 @@
+SECRET_KEY = 'django-insecure-b^2j@ij6#th@$7+oow!)o=3ag1ne_kdohy_4*s8)lg1yk6ba-h'
+DBUSER = 'mwbwqcjhuqlyok'
+DBNAME = 'd62og6j01iuq4a'
+DBPASSWORD = 'e031f91a41d16225e2acfbdfaf81ddf3e05420f2385fbf6b189c039c719de266'
+DBHOST = 'ec2-3-216-113-109.compute-1.amazonaws.com'
