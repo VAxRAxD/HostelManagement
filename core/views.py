@@ -4,8 +4,28 @@ from rest_framework.response import Response
 
 from . serializers import *
 from . models import *
+from . urls import *
 
 # Create your views here.
+@api_view(('GET',))
+def routes(request):
+    ROUTES=[{
+        "admin/": "Admin Page",
+        "students/": "Students Details",
+        "rooms/": "Room Details",
+        "mess/": "Mess Details",
+        "login/": "Login",
+        "register/": "Register",
+        "students/<str:id>/": "Specific Student Details",
+        "rooms/<str:id>/": "Specific Room Details",
+        "rooms/delete/<str:id>/": "Delete a Room",
+        "students/delete/<str:id>/": "Delete a Student",
+        "student/update/": "Update Details of Student",
+        "hostelfees/<str:id>/": "Pay Hostel Fees",
+        "messfees/<str:id>/": "Pay Mess Fees"
+    }]
+    return Response(ROUTES)
+
 @api_view(('GET',))
 def students(request):
     students=Student.objects.all()
@@ -33,26 +53,42 @@ def roomDetails(request,id):
 @api_view(('GET',))
 def deleteRoom(request,id):
     room=Room.objects.get(number=id)
-    room.delete()
-    return HttpResponse()
+    if room:
+        data=[{
+                'deletion':'pass'
+            }]
+        room.delete()
+        return Response(data)
+    else:
+        data=[{
+                'deletion':'fail'
+            }]
+        return Response(data)
+
 
 @api_view(('GET',))
 def deleteStudent(request,id):
     student=Student.objects.get(id=id)
-    if student.room:
-        room_no=student.room.number
-        room=Room.objects.get(number=room_no)
-        room.status="Empty"
-        room.save()
-        student.delete()
-        data=[{
-                'deletion':'pass'
-            }]
-        return Response(data)
+    if student:
+        if student.room:
+            room_no=student.room.number
+            room=Room.objects.get(number=room_no)
+            room.status="Empty"
+            room.save()
+            student.delete()
+            data=[{
+                    'deletion':'pass'
+                }]
+            return Response(data)
+        else:
+            student.delete()
+            data=[{
+                    'deletion':'pass'
+                }]
+            return Response(data)
     else:
-        student.delete()
         data=[{
-                'deletion':'pass'
+                'deletion':'fail'
             }]
         return Response(data)
 
