@@ -152,7 +152,7 @@ def studentUpdate(request):
         room_no=data[5]
         hostel_fees=data[6]
         mess_fees=data[7]
-        student=Student.objects.get(id=id)
+        student=Student.objects.get(id=int(id))
         if student:
             student.name=name
             student.email=email
