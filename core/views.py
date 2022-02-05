@@ -168,12 +168,12 @@ def studentUpdate(request):
                     student.save()
             else:
                 get_room=Room.objects.get(number=room_no)
-                #if get_room.status=="Occupied":
-                 #   data=[{
-                  #  'update':'fail',
-                   # 'error': 'room'
-                    #}]
-                    #return Response(data)
+                if get_room.status=="Occupied":
+                    data=[{
+                    'update':'fail',
+                    'error': 'room'
+                    }]
+                    return Response(data)
                 if student.room:
                     room=Room.objects.get(number=student.room.number)
                     room.student=None
