@@ -50,7 +50,7 @@ def roomDetails(request,id):
     serializer=RoomSerializer(room,many=False)
     return Response(serializer.data)
 
-@api_view(('GET',))
+@api_view(('GET','POST'))
 def deleteRoom(request,id):
     room=Room.objects.get(number=id)
     if room:
@@ -66,7 +66,7 @@ def deleteRoom(request,id):
         return Response(data)
 
 
-@api_view(('GET',))
+@api_view(('GET','POST'))
 def deleteStudent(request,id):
     student=Student.objects.get(id=id)
     if student:
