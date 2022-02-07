@@ -107,7 +107,8 @@ def login(request):
         student=Student.objects.get(email=email)
         if student and student.password==password:
             validate=[{
-                    'validation':'pass'
+                    'validation':'pass',
+                    'id': str(student.id)
                 }]
         else:
             validate=[{
