@@ -101,6 +101,7 @@ def mess(request):
 @api_view(('GET','POST'))
 def login(request):
     if request.method=="POST":
+        print(request.data)
         data=list(request.data[0].values())
         email=data[0]
         password=data[1]
